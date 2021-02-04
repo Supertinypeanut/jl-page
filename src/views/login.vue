@@ -30,23 +30,20 @@
 					</a-input>
 				</a-form-item>
 				<a-form-item>
-					<a-button
-						type="primary"
-						html-type="submit"
-						:disabled="formInline.user === '' || formInline.password === ''"
-					>
+					<a-button type="primary" html-type="submit" :disabled="disableLogin">
 						登录
 					</a-button>
 				</a-form-item>
 			</a-form>
-			<a-button>立即注册</a-button>
+			<a-button @click="onToRegister">立即注册</a-button>
 		</a-card>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { computed, defineComponent, reactive } from 'vue'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
+import router from '@/router'
 
 export default defineComponent({
 	name: 'login',
@@ -60,13 +57,22 @@ export default defineComponent({
 			password: '',
 		})
 
+		const disableLogin = computed(
+			() => formInline.user === '' || formInline.password === ''
+		)
+
 		const handleSubmit = () => {
 			console.log(formInline)
 		}
 
+		const onToRegister = () => {
+			router.push('/register')
+		}
 		return {
+			disableLogin,
 			formInline,
 			handleSubmit,
+			onToRegister,
 		}
 	},
 })
