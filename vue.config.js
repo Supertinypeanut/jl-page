@@ -18,7 +18,8 @@ module.exports = {
 	},
 	chainWebpack: config => {
 		config.plugin('html').tap(args => {
-			args[0].title = '剑灵'
+			console.log(args)
+			args[0].title = '剑灵 Home Panel'
 			return args
 		})
 	},
